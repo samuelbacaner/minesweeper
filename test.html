@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-pass {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border-color: #d6e9c6;
+        }
+        .test-fail {
+            background-color: #f2dede;
+            color: #a94442;
+            border-color: #ebccd1;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Minesweeper Test Suite</h1>
+        <button id="run-tests">Run Tests</button>
+        <div id="test-results"></div>
+    </div>
+
+    <script>
+        // Load the game script
+        const gameScript = document.createElement('script');
+        gameScript.src = 'script.js';
+        document.head.appendChild(gameScript);
+        
+        // Wait for the script to load
+        gameScript.onload = function() {
+            document.getElementById('run-tests').addEventListener('click', runTests);
+        };
+        
+        function assert(condition, message) {
+            return { 
+                passed: !!condition, 
+                message: message 
+            };
+        }
+        
+        function displayTestResult(result) {
+            const resultsDiv = document.getElementById('test-results');
+            const testItem = document.createElement('div');
+            testItem.className = 'test-item ' + (result.passed ? 'test-pass' : 'test-fail');
+            testItem.textContent = result.message + (result.passed ? ' - PASSED' : ' - FAILED');
+            resultsDiv.appendChild(testItem);
+            return result.passed;
+        }
+        
+        function runTests() {
+            // Clear previous results
+            document.getElementById('test-results').innerHTML = '';
+            
+            // Test 1: Check if gameState object exists
+            let test = assert(typeof gameState === 'object', 'Test 1: gameState object exists');
+            displayTestResult(test);
+            
+            // Test 2: Check if difficulties are defined
+            test = assert(typeof difficulties === 'object' && 
+                           difficulties.beginner && 
+                           difficulties.intermediate && 
+                           difficulties.expert, 
+                          'Test 2: Difficulty levels are defined');
+            displayTestResult(test);
+            
+            // Test 3: Test board creation
+            createEmptyBoard();
+            test = assert(gameState.board.length === gameState.boardSize.rows, 
+                          'Test 3: Board has correct number of rows');
+            displayTestResult(test);
+            
+            // Test 4: Test mine placement
+            gameState.firstClick = true;
+            placeMines(0, 0);
+            let mineCount = 0;
+            for (let i = 0; i < gameState.boardSize.rows; i++) {
+                for (let j = 0; j < gameState.boardSize.cols; j++) {
+                    if (gameState.board[i][j].isMine) mineCount++;
+                }
+            }
+            test = assert(mineCount === gameState.mineCount, 
+                          'Test 4: Correct number of mines placed');
+            displayTestResult(test);
+            
+            // Test 5: Test neighbor calculation
+            calculateNeighborMineCounts();
+            let hasNeighbors = false;
+            for (let i = 0; i < gameState.boardSize.rows; i++) {
+                for (let j = 0; j < gameState.boardSize.cols; j++) {
+                    if (!gameState.board[i][j].isMine && gameState.board[i][j].neighborMines > 0) {
+                        hasNeighbors = true;
+                        break;
+                    }
+                }
+                if (hasNeighbors) break;
+            }
+            test = assert(hasNeighbors, 
+                          'Test 5: Neighbor mine counts are calculated');
+            displayTestResult(test);
+            
+            // Test 6: Test game state reset
+            gameState.gameOver = true;
+            gameState.gameWon = true;
+            gameState.revealedCount = 50;
+            initGame();
+            test = assert(!gameState.gameOver && !gameState.gameWon && gameState.revealedCount === 0, 
+                          'Test 6: Game state resets correctly');
+            displayTestResult(test);
+            
+            // Test 7: Test cell flagging
+            const testCell = gameState.board[1][1];
+            testCell.isFlagged = false;
+            testCell.isFlagged = !testCell.isFlagged;
+            test = assert(testCell.isFlagged, 
+                          'Test 7: Cell flagging works');
+            displayTestResult(test);
+            
+            // Test 8: Test difficulty changes
+            const prevRows = gameState.boardSize.rows;
+            elements.difficultySelect.value = 'intermediate';
+            initGame();
+            test = assert(gameState.boardSize.rows === difficulties.intermediate.rows, 
+                          'Test 8: Difficulty change updates board size');
+            displayTestResult(test);
+            
+            // Clean up
+            elements.difficultySelect.value = 'beginner';
+            initGame();
+        }
+    </script>
+</body>
+</html>
