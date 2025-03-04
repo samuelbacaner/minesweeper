@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+select, button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+select {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.game-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#mine-count, #timer {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    margin: 0 auto;
+    width: fit-content;
+    background-color: #bdbdbd;
+    border: 3px solid #7b7b7b;
+    padding: 3px;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: #c0c0c0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+    border: 2px solid;
+    border-color: #fff #7b7b7b #7b7b7b #fff;
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: #d9d9d9;
+    border: 1px solid #7b7b7b;
+}
+
+.cell.flagged {
+    background-color: #c0c0c0;
+    color: red;
+}
+
+.cell.mine {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+.game-message {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    height: 30px;
+}
+
+/* Number colors */
+.cell[data-value="1"] { color: blue; }
+.cell[data-value="2"] { color: green; }
+.cell[data-value="3"] { color: red; }
+.cell[data-value="4"] { color: darkblue; }
+.cell[data-value="5"] { color: darkred; }
+.cell[data-value="6"] { color: teal; }
+.cell[data-value="7"] { color: black; }
+.cell[data-value="8"] { color: gray; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .game-info {
+        justify-content: center;
+    }
+    
+    .cell {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+}
