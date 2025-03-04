@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Minesweeper</h1>
+        
+        <div class="game-controls">
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="beginner">Beginner (9x9, 10 mines)</option>
+                    <option value="intermediate">Intermediate (16x16, 40 mines)</option>
+                    <option value="expert">Expert (16x30, 99 mines)</option>
+                </select>
+                <button id="new-game-btn">New Game</button>
+            </div>
+            
+            <div class="game-info">
+                <div class="mines-counter">
+                    <span id="mines-count">0</span> mines left
+                </div>
+                <div class="game-face" id="game-face">😊</div>
+                <div class="timer">
+                    Time: <span id="timer">0</span>s
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-status" id="game-status"></div>
+        
+        <div class="game-board" id="game-board"></div>
+        
+        <div class="help-section">
+            <button id="help-btn">Help</button>
+        </div>
+        
+        <div class="modal" id="help-modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>How to Play Minesweeper</h3>
+                <div class="instructions">
+                    <h4>Rules:</h4>
+                    <ul>
+                        <li>The goal is to uncover all cells that don't contain mines.</li>
+                        <li>Numbers show how many mines are adjacent to that cell.</li>
+                        <li>Use logic to determine which cells are safe to click.</li>
+                    </ul>
+                    
+                    <h4>Controls:</h4>
+                    <ul>
+                        <li><strong>Left click:</strong> Reveal a cell</li>
+                        <li><strong>Right click:</strong> Flag a suspected mine</li>
+                        <li><strong>Game face:</strong> Click to start a new game</li>
+                    </ul>
+                    
+                    <h4>Difficulty Levels:</h4>
+                    <ul>
+                        <li><strong>Beginner:</strong> 9x9 grid with 10 mines</li>
+                        <li><strong>Intermediate:</strong> 16x16 grid with 40 mines</li>
+                        <li><strong>Expert:</strong> 16x30 grid with 99 mines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="minesweeper.js"></script>
+</body>
+</html>

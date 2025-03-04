@@ -1,0 +1,332 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+select, button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.game-face {
+    font-size: 24px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.game-face:hover {
+    transform: scale(1.1);
+}
+
+.game-face:active {
+    transform: scale(0.95);
+}
+
+/* Game Status */
+.game-status {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    height: 30px;
+    margin-bottom: 15px;
+    color: #e74c3c;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    margin: 0 auto;
+    border: 2px solid #34495e;
+    background-color: #bdc3c7;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: #95a5a6;
+    border: 1px solid #7f8c8d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.cell:hover {
+    background-color: #7f8c8d;
+}
+
+.cell.revealed {
+    background-color: #ecf0f1;
+    animation: reveal 0.2s ease-out;
+}
+
+@keyframes reveal {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cell.flagged {
+    background-color: #e67e22;
+    position: relative;
+}
+
+.cell.flagged::after {
+    content: "🚩";
+    position: absolute;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: flag-pop 0.3s ease-out;
+}
+
+@keyframes flag-pop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    70% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.cell.mine {
+    background-color: #e74c3c;
+    animation: explode 0.5s ease-out;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); background-color: #ffcc00; }
+    100% { transform: scale(1); background-color: #e74c3c; }
+}
+
+/* Numbers colors */
+.num-1 { color: blue; }
+.num-2 { color: green; }
+.num-3 { color: red; }
+.num-4 { color: purple; }
+.num-5 { color: maroon; }
+.num-6 { color: turquoise; }
+.num-7 { color: black; }
+.num-8 { color: gray; }
+
+/* Help Button */
+.help-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#help-btn {
+    background-color: #2ecc71;
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+#help-btn:hover {
+    background-color: #27ae60;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    animation: modal-open 0.4s ease-out;
+}
+
+@keyframes modal-open {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Instructions */
+.instructions {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border-left: 4px solid #3498db;
+}
+
+.instructions h4 {
+    margin: 15px 0 8px 0;
+    color: #2c3e50;
+}
+
+.instructions h4:first-child {
+    margin-top: 0;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.instructions li {
+    margin-bottom: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+        margin-top: 10px;
+    }
+    
+    .cell {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    .game-controls {
+        padding: 8px;
+        gap: 10px;
+    }
+    
+    .difficulty-selector {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    select, button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .game-face {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cell {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .game-controls {
+        padding: 10px;
+    }
+    
+    .difficulty-selector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
