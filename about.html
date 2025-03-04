@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Minesweeper</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        .about-content {
+            text-align: left;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .history-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About Minesweeper</h1>
+        
+        <div class="about-content">
+            <h2>What is Minesweeper?</h2>
+            <p>
+                Minesweeper is a single-player puzzle game that originated in the 1960s. The objective is to clear a rectangular board 
+                containing hidden "mines" or bombs without detonating any of them, with help from clues about the number of neighboring mines in each field.
+            </p>
+            
+            <h2>How to Play</h2>
+            <p>
+                <strong>Left-click</strong> to reveal a cell. If it's a mine, the game is over. If it's not a mine, it will show a number indicating how many mines are adjacent to it.
+                <br><br>
+                <strong>Right-click</strong> to place a flag on a cell you suspect contains a mine.
+                <br><br>
+                The goal is to reveal all cells that don't contain mines.
+            </p>
+            
+            <h2>Difficulty Levels</h2>
+            <ul>
+                <li><strong>Beginner:</strong> 9x9 grid with 10 mines</li>
+                <li><strong>Intermediate:</strong> 16x16 grid with 40 mines</li>
+                <li><strong>Expert:</strong> 16x30 grid with 99 mines</li>
+            </ul>
+            
+            <div class="history-section">
+                <h2>History of Minesweeper</h2>
+                <p>
+                    The first version of Minesweeper was created in the 1960s, and it has since become one of the most played computer games.
+                    It gained popularity when Microsoft included it in Windows 3.1 in 1992. The game was originally designed to help users become familiar with using a mouse,
+                    particularly right-clicking and differentiating between left and right mouse buttons.
+                </p>
+            </div>
+            
+            <a href="index.html" class="back-btn">Back to Game</a>
+        </div>
+    </div>
+</body>
+</html>
